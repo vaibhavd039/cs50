@@ -1,0 +1,85 @@
+0. How many different colors does each format support?
+ans:JPEG supports 24 bits format. so, power(2, 24) = 16,777,216 colors
+    GIF supports 8 bits format. so, power(2, 8) = 256 colors
+    PNG supports 24 bits format. so, power(2, 24) = 16,777,216 colors
+    BMP supports 32 bits format. so, power(2, 32)= 4,294,967,296 colors
+    
+1. Which of the formats supports animation?
+ans: GIF
+
+2. What’s the difference between lossy and lossless compression?
+ans: lossy compression is a compression technique in which some data is lost.
+     Exact original image cannot be recovered from compressed data.
+     
+     lossless compression is a compression technique in which exact copy of original data can be recovered from compressed data.
+     No loss of informatin.
+     This method is less efficient than lossy compression.
+
+3. Which of these formats is lossy-compressed?
+ans: JPEG
+
+4. What happens, technically speaking, when a file is deleted on a FAT file system?
+ans: If a file is deleted on the FAT file system the first character of a file name in the directory entry is replaced by a 
+     special character (E5h) causing the operating system (Windows, DOS etc.) to ignore the file. 
+     Also, all clusters allocated to the file are marked as 'available' in the File Allocation Table (FAT).
+
+5. What can someone like you do to ensure (with high probability) that files you delete cannot be recovered?
+ans: Write NUL bytes or zeros (or random characters) to every address on the disk.
+     There's consensus that "overwriting a disk with a few random passes" is sufficient.
+     Commercially available sanitization tools like Eraser or Wipe can be used to completely erase data that cannot be recovered.
+     
+6. What’s stdint.h?
+ans: It is a header file wich consists of typedefs and macros for making integer variables of custom sizes.
+
+7. What’s the point of using uint8_t, uint32_t, int32_t, and uint16_t in a program?
+ans:uint8_t is used to declare an unsigned integer type with a width of exactly 8 bits
+    uint32_t is used to declare an unsigned integer type with a width of exactly 32 bits
+    int32_t is used to declare a signed integer type with a width of exactly 32 bits
+    uint16_t is used to declare an unsigned integer type with a width of exactly 16 bits
+
+8. How many bytes is a BYTE, a DWORD, a LONG, and a WORD, respectively? (Assume a 32-bit architecture like the CS50 Appliance.)
+ans: BYTE: 8bits
+     DWORD:32bits
+     LONG: 32bits
+     WORD: 16bits
+
+9. What (in ASCII, decimal, or hexadecimal) must the first two bytes of any BMP file be? (Leading bytes used to identify file formats (with high probability) are generally called "magic numbers.)"
+ans: first 2 bytes in BMP file are bfType.
+    ASCII: BM
+    decimal:19778
+    hexadecimal: 0x42 0x4D
+
+10. What’s the difference between bfSize and biSize?
+ans: biSize is the size of BITMAPINFOHEADER in bytes
+     bfSize is the size of bitmap file in bytes including padding
+     
+11. What does it mean if biHeight is negative?
+ans: If biHeight is negative, the bitmap is a top-down pixel order with the origin at the upper left corner.
+
+12. What field in BITMAPINFOHEADER specifies the BMP’s color depth (i.e., bits per pixel)?
+ans: biBitCount (type: WORD)
+
+13. Why might fopen return NULL in copy.c:37?
+ans: If it can't create the file or find the file due to reasons like not enough memory or permission not available, it will.
+     
+14. Why is the third argument to fread always 1 in our code?
+ans: Third argument specifies no. of object to be read.
+     We are reading 1 object at a time. so, we pass 1 as 3rd argument.
+
+15. What value does copy.c:70 assign padding if bi.biWidth is 3?
+ans: int padding =  (4 - (bi.biWidth * sizeof(RGBTRIPLE)) % 4) % 4;
+     so, padding = (4 - (3 * 3) % 4) % 4 = 3
+     so, 3 bytes padding
+     
+16. What does fseek do?
+ans: fseek() is used to place the cursor to a specific location within a file.
+     It is used to move cursor to a specific position by providing no. of bytes to be moved.
+
+17. What is SEEK_CUR?
+ans: It represents the current position of cursor within a file.
+
+18. Whodunit?
+ans: verdict.bmp consists of a drawing which shows a person with a cat.
+     This person resembles with one of the CS50 staff (so, i guess Rob Bowden did it).
+
+

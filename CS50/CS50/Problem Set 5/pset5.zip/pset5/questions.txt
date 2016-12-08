@@ -1,0 +1,62 @@
+0.  What is pneumonoultramicroscopicsilicovolcanoconiosis?
+ans:An artificial long word said to mean a lung disease caused by inhaling very fine ash and sand dust
+
+1.  According to its man page, what does getrusage do?
+ans:getrusage returns resource usage measures for one of the following:
+    a) RUSAGE_SELF:
+        Return resource usage statistics for the calling process, which is the sum of resources used by all threads in the process.
+    b) RUSAGE_CHILDREN:
+        Return  resource usage statistics for all children of the calling process that have terminated and been waited for.  
+        These statistics will include the resources used by grandchildren, and further removed descendants, if all of the 
+        intervening descendants waited on their terminated children.
+    c) RUSAGE_THREAD:
+        Return resource usage statistics for the calling thread.
+        
+2.  Per that same man page, how many members are in a variable of type struct rusage?
+ans: 16 members
+
+3.  Why do you think we pass before and after by reference (instead of by value) to calculate, even though we’re not changing their contents?
+ans:The resource usages are returned in the structure pointed to by usage. So, before and after are references of struct rusage 
+	which have access to all members of the struct rusage. Therefore it is better to access members of the structure using its 
+	reference rather than passing all member values.
+
+4.  Explain as precisely as possible, in a paragraph or more, how main goes about reading words from a file. In other words, convince us that you indeed understand how that function’s for loop works.
+ans:The text file is opened in file pointer fp in read mode and checked for the existence.
+	If it is not NULL then proceed further otherwise return from the program.
+	The for loop uses fgetc(fp) function to read a character from a file iteratively until EOF (end of file) is reached.
+	In each iteration, first if condition is checked for allowing only alphabetical characters and apostrophe.
+	The condition also checks if the character is apostrophe then it should be at least second character in word from the file (index > 0).
+	If this condition is true then the character is added in a word array.
+	So, In this condition, characters are added in word array as long as they are alphabetical with the 
+	exception of apostrophe until word length does not exceed length limit.
+	If it exceeds the length limit than that word will no longer be considered for spell checking and will 
+	be skipped through while loop resetting the index to 0 to consider next word.
+	Second condition checks that if a word contains any digit than it should not be considered for spell checking.
+	So, that complete word will be skipped through while loop resetting the index to 0 to consider next word.
+	Third condition will be true when a valid word has been identified.
+	So here a word array is terminated by '\0' character along with incrementing the word counter to track number of words.
+	Then the word is checked for misspelling. If the word comes out to be misspelled then it is printed 
+	otherwise index is reset to 0 to consider next word.
+    
+5.  Why do you think we used fgetc to read each word’s characters one at a time rather than use fscanf with a format string like "%s" to read whole words at a time? Put another way, what problems might arise by relying on fscanf alone?
+ans:Using fscanf alone, we will have to declare the length of the string word initially. Also, we had a limitation on the 
+	word length, so overflow problem may arise in this case. Even if we would have used fscanf, we would still be needing 
+	character by character processing for checking digits and apostrophe.
+    
+6.  Why do you think we declared the parameters for check and load as const?
+ans:Ideally we should make the fields constant which will not be going to change. Here word and dictionary are parameters 
+	which should not be changed. So, making them constant will avoid updating them accidentally. 
+
+7.  What data structure(s) did you use to implement your spell-checker? Be sure not to leave your answer at just "hash table," "trie," or the like. Expound on what’s inside each of your "nodes."
+ans:I have implemented trie data structure. Here in this, two members are there in each node. One is is_word which is boolean 
+	and states that whether this node ends as a word or not. Second member is struct to children array of length 27 (number of 
+	alphabets + apostrophe).
+	
+8.  How slow was your code the first time you got it working correctly?
+ans:I went through the video provided for reference and implemented trie data structure, so the code was fast enough in first attempt only. 
+
+9.  What kinds of changes, if any, did you make to your code in order to improve its performance?
+ans:Implemented trie data structure instead of hash tables.
+
+10. Do you feel that your code has any bottlenecks that you were not able to chip away at?
+ans:Not any, as per my understanding.
